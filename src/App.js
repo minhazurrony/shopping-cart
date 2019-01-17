@@ -1,25 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import SearchBar from './components/SearchBar';
+import ProductList from './components/ProductList';
 import './App.css';
 
 class App extends Component {
+  state = {
+    searchTerm: '',
+    productList: [],
+    searchedProducts: []
+  };
+
+  handleInputChange = e => {
+    this.setState({ searchTerm: e.target.value });
+  };
+
+  productSearch = e => {
+    e.preventDefault();
+    let { searchTerm } = this.state;
+    let api = `http://es.backpackbang.com:9200/products/amazon/_search?q=title:${searchTerm}`;
+
+    fetch(api)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ productList: data.hits.hits });
+        console.log(this.state.productList);
+      });
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-8'>
+            <SearchBar
+              searchTerm={this.state.searchTerm}
+              handleInputChange={this.handleInputChange}
+              handleProductSearch={this.productSearch}
+            />
+            {this.state.productList.length === 0 ? (
+              <p>What'll You Buy Today?</p>
+            ) : (
+              <ProductList products={this.state.productList} />
+            )}
+          </div>
+        </div>
       </div>
     );
   }
