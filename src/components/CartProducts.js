@@ -27,7 +27,7 @@ class CartProducts extends Component {
     if (cartItems.length !== 0) {
       return (
         <React.Fragment>
-          <div className='row'>
+          <div className='row cart-heading'>
             <div className='col-md-8'>
               <h2>Cart</h2>
             </div>
@@ -46,6 +46,7 @@ class CartProducts extends Component {
               <tr>
                 <th scope='col'>Product Name</th>
                 <th scope='col'>Price</th>
+                <th />
               </tr>
             </thead>
             <tbody>
@@ -61,7 +62,7 @@ class CartProducts extends Component {
     } else {
       return (
         <React.Fragment>
-          <div className='row'>
+          <div className='row cart-heading-two'>
             <div className='col-md-8'>
               <h2>Cart</h2>
             </div>

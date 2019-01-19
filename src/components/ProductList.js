@@ -31,7 +31,7 @@ const ProductList = props => {
     );
   });
 
-  return <div className='card-group flex-container'>{productDetail}</div>;
+  return <div className='card-group'>{productDetail}</div>;
 };
 
 export default ProductList;
