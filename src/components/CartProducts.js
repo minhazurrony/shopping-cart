@@ -6,6 +6,14 @@ class CartProducts extends Component {
         <tr key={item._id}>
           <td>{item._source.title}</td>
           <td>{item._source.salePrice}</td>
+          <td>
+            <button
+              className='btn btn-danger'
+              onClick={() => this.props.handleDeleteCartItem(item._id)}
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       );
     });

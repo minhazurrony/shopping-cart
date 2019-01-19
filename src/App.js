@@ -27,6 +27,14 @@ class App extends Component {
     this.setState({ cartProducts: [] });
   };
 
+  handleDeleteCartItem = id => {
+    this.setState({
+      cartProducts: this.state.cartProducts.filter(product => {
+        return product._id !== id;
+      })
+    });
+  };
+
   productSearch = e => {
     e.preventDefault();
     let { searchTerm } = this.state;
@@ -72,6 +80,7 @@ class App extends Component {
               cartItem={this.state.cartProducts}
               productPrice={this.state.cartProducts}
               onHandleClearCart={this.handleClearCart}
+              handleDeleteCartItem={this.handleDeleteCartItem}
             />
           </div>
         </div>
