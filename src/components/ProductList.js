@@ -16,7 +16,13 @@ const ProductList = props => {
               Price: {product._source.price} <br />
               Sale Price: {product._source.salePrice}
             </p>
-            <button href='#' className='btn btn-primary'>
+            <button
+              href='#'
+              className='btn btn-primary'
+              onClick={() => {
+                props.handleCartButtonClick(product);
+              }}
+            >
               Add to Cart
             </button>
           </div>

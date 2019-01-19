@@ -2,16 +2,24 @@ import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import ProductList from './components/ProductList';
 import './App.css';
+import CartProducts from './components/CartProducts';
 
 class App extends Component {
   state = {
-    searchTerm: '',
+    searchTerm: 'bag',
     productList: [],
-    searchedProducts: []
+    //searchedProducts: [],
+    cartProducts: []
   };
 
   handleInputChange = e => {
     this.setState({ searchTerm: e.target.value });
+  };
+
+  handleCartButtonClick = product => {
+    this.setState(prevState => {
+      return { cartProducts: [...prevState.cartProducts, product] };
+    });
   };
 
   productSearch = e => {
@@ -23,7 +31,6 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({ productList: data.hits.hits });
-        console.log(this.state.productList);
       });
   };
 
@@ -40,8 +47,17 @@ class App extends Component {
             {this.state.productList.length === 0 ? (
               <p>What'll You Buy Today?</p>
             ) : (
-              <ProductList products={this.state.productList} />
+              <ProductList
+                products={this.state.productList}
+                handleCartButtonClick={this.handleCartButtonClick}
+              />
             )}
+          </div>
+          <div className='col-md-4'>
+            <CartProducts
+              cartItem={this.state.cartProducts}
+              productPrice={this.state.cartProducts}
+            />
           </div>
         </div>
       </div>
