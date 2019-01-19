@@ -30,6 +30,7 @@ const ProductList = props => {
       </React.Fragment>
     );
   });
+
   return <div className='card-group flex-container'>{productDetail}</div>;
 };
 

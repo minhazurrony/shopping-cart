@@ -6,10 +6,11 @@ import CartProducts from './components/CartProducts';
 
 class App extends Component {
   state = {
-    searchTerm: 'bag',
+    searchTerm: '',
     productList: [],
-    //searchedProducts: [],
-    cartProducts: []
+    cartProducts: [],
+    isLoading: false,
+    isSearchResult: false
   };
 
   handleInputChange = e => {
@@ -22,15 +23,24 @@ class App extends Component {
     });
   };
 
+  handleClearCart = () => {
+    this.setState({ cartProducts: [] });
+  };
+
   productSearch = e => {
     e.preventDefault();
     let { searchTerm } = this.state;
+    this.setState({ isLoading: true, isSearchResult: false });
     let api = `http://es.backpackbang.com:9200/products/amazon/_search?q=title:${searchTerm}`;
 
     fetch(api)
       .then(res => res.json())
       .then(data => {
-        this.setState({ productList: data.hits.hits });
+        this.setState({
+          productList: data.hits.hits,
+          isLoading: false,
+          isSearchResult: true
+        });
       });
   };
 
@@ -44,8 +54,12 @@ class App extends Component {
               handleInputChange={this.handleInputChange}
               handleProductSearch={this.productSearch}
             />
-            {this.state.productList.length === 0 ? (
+            {this.state.isLoading && <p>Loading..</p>}
+            {this.state.searchTerm === '' ? (
               <p>What'll You Buy Today?</p>
+            ) : this.state.productList.length === 0 &&
+              this.state.isSearchResult ? (
+              <p>Nothing Found...!</p>
             ) : (
               <ProductList
                 products={this.state.productList}
@@ -57,6 +71,7 @@ class App extends Component {
             <CartProducts
               cartItem={this.state.cartProducts}
               productPrice={this.state.cartProducts}
+              onHandleClearCart={this.handleClearCart}
             />
           </div>
         </div>
