@@ -39,9 +39,14 @@ class App extends Component {
     e.preventDefault();
     let { searchTerm } = this.state;
     this.setState({ isLoading: true, isSearchResult: false });
-    let api = `http://es.backpackbang.com:9200/products/amazon/_search?q=title:${searchTerm}`;
+    let api = `https://cors-anywhere.herokuapp.com/http://es.backpackbang.com:9200/products/amazon/_search?q=title:${searchTerm}`;
 
-    fetch(api)
+    fetch(api, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    })
       .then(res => res.json())
       .then(data => {
         this.setState({
