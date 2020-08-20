@@ -7,7 +7,10 @@
 # Technologies used:
 - ReactJS
 - Bootstrap for ui component
-- fetch api for data fetching
+- Fetch API for data fetching
+
+# Objectives
+It's an inspirational project. In this project, i learn how to fetch data from external API and integrate into app.
 
 
 
