@@ -11,7 +11,7 @@
 
 # Objectives
 It's an inspirational project. In this project, i learn how to fetch data from external API and integrate into app.
-It's a like playground to play with react's state and props.
+It's like a playground to play with react's state and props.
 
 
 
