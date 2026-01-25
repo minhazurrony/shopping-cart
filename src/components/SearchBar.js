@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchBar = props => {
+const SearchBar = (props) => {
   return (
     <form onSubmit={props.handleProductSearch}>
       <div className='input-group'>
