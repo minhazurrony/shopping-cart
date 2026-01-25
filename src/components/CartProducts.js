@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+
 class CartProducts extends Component {
   render() {
     const cartItems = this.props.cartItem.map(item => {
